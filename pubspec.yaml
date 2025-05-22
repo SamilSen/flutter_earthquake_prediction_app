@@ -1,31 +1,30 @@
 name: flutter_earthquake_prediction_app
-description: A new Flutter project.
-publish_to: 'none'
-
+description: A Flutter app to show earthquake prediction results.
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.7.2
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8
+
+  cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true
 
   assets:
-    - assets/train_validation_earthquake.png
+    - assets/Landing.png
     - assets/train_validation_energy.png
     - assets/train_validation_bvalue.png
+    - assets/train_validation_earthquake.png
     - assets/machine_learning_model.png
+    - assets/prediction_bvalue.png
     - assets/prediction_earthquake.png
     - assets/prediction_energy.png
-    - assets/prediction_bvalue.png
     - assets/prediction_final_for_Istanbul.png
