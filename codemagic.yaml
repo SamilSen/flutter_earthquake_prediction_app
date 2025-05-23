@@ -1,0 +1,31 @@
+workflows:
+  ios-workflow:
+    name: iOS Build Workflow
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+      groups:
+        - default   # Ortam değişkenlerini buradan alacak
+    scripts:
+      - name: Decode API Key
+        script: |
+          echo $APP_STORE_CONNECT_PRIVATE_KEY_BASE64 | base64 --decode > ./AuthKey_M536F4G6MG.p8
+      - name: Flutter pub get
+        script: |
+          flutter pub get
+      - name: Build iOS
+        script: |
+          flutter build ios --release --no-codesign
+    artifacts:
+      - build/ios/iphoneos/Runner.app
+    publishing:
+      email:
+        recipients:
+          - samilsen34@gmail.com
+      app_store_connect:
+        api_key: ./AuthKey_M536F4G6MG.p8
+        key_id: M536F4G6MG
+        issuer_id: 8000ca02-7076-4b82-9517-fc0eda561c2b
+        submit_to_testflight: true
