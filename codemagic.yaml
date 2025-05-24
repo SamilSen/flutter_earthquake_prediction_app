@@ -1,0 +1,31 @@
+workflows:
+  ios-workflow:
+    name: iOS Build Workflow
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+      groups:
+        - appstore_credentials
+    scripts:
+      - name: Decode API Key
+        script: |
+          echo $APP_STORE_CONNECT_PRIVATE_KEY | base64 --decode > ./AuthKey_M536F4G6MG.p8
+      - name: Flutter pub get
+        script: |
+          flutter pub get
+      - name: Build IPA
+        script: |
+          flutter build ipa --release
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      email:
+        recipients:
+          - samilsen34@gmail.com
+      app_store_connect:
+        api_key: ./AuthKey_M536F4G6MG.p8
+        key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
+        submit_to_testflight: true
